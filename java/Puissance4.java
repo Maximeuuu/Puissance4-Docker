@@ -150,8 +150,8 @@ public class Puissance4
 		System.out.println("---------------");
 	}
 
-public boolean verifierVictoire(char joueur)
-{
+	public boolean verifierVictoire(char joueur)
+	{
 		// Vérification des lignes
 		for (int i = 0; i < LIGNES; i++)
 		{
