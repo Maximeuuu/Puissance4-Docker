@@ -12,77 +12,72 @@ public class Puissance4
 	private char[][] plateau;
 	private char joueurActuel;
 	
-	private boolean jeuFini;
-	
 	private Controleur ctrl;
 
 	public Puissance4(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
 		
-		this.plateau = new char[LIGNES][COLONNES];
+		plateau = new char[LIGNES][COLONNES];
 		for (int i = 0; i < LIGNES; i++)
 		{
 			for (int j = 0; j < COLONNES; j++)
 			{
-				this.plateau[i][j] = VIDE;
+				plateau[i][j] = VIDE;
 			}
 		}
-		this.joueurActuel = JOUEUR1;
-		this.jeuFini = false;
+		joueurActuel = JOUEUR1;
 	}
 
 	public void placer( int col )
 	{
-		if( !this.jeuFini )
+		boolean jeuFini = false;
+		boolean coupValide = false;
+		while (!coupValide)
 		{
-			boolean coupValide = false;
-			while (!coupValide)
+			System.out.print("Joueur " + joueurActuel );
+			int colonne = col;
+			if (colonne >= 0 && colonne < COLONNES && plateau[0][colonne] == VIDE)
 			{
-				System.out.print("Joueur " + joueurActuel );
-				int colonne = col;
-				if (colonne >= 0 && colonne < COLONNES && this.plateau[0][colonne] == VIDE)
+				for (int i = LIGNES - 1; i >= 0; i--)
 				{
-					for (int i = LIGNES - 1; i >= 0; i--)
+					if (plateau[i][colonne] == VIDE)
 					{
-						if (this.plateau[i][colonne] == VIDE)
-						{
-							this.plateau[i][colonne] = this.joueurActuel;
-							coupValide = true;
-							break;
-						}
+						plateau[i][colonne] = joueurActuel;
+						coupValide = true;
+						break;
 					}
-				} else
-				{
-					System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
 				}
-			}
-			if (verifierVictoire(this.joueurActuel))
-			{
-				afficherPlateau();
-				System.out.println("Joueur " + this.joueurActuel + " remporte la partie !");
-				this.jeuFini = true;
-			} else if (verifierEgalite())
-			{
-				afficherPlateau();
-				System.out.println("Egalité !");
-				this.jeuFini = true;
 			} else
 			{
-				this.joueurActuel = (this.joueurActuel == JOUEUR1) ? JOUEUR2 : JOUEUR1;
+				System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
 			}
-			
-			this.ctrl.setTexteJoueur( this.joueurActuel );
+		}
+		if (verifierVictoire(joueurActuel))
+		{
+			afficherPlateau();
+			System.out.println("Joueur " + joueurActuel + " remporte la partie !");
+			jeuFini = true;
+		} else if (verifierEgalite())
+		{
+			afficherPlateau();
+			System.out.println("Egalité !");
+			jeuFini = true;
+		} else
+		{
+			joueurActuel = (joueurActuel == JOUEUR1) ? JOUEUR2 : JOUEUR1;
 		}
 		
+		this.ctrl.setTexteJoueur( joueurActuel );
+		
 		//a modifié
-		if( this.jeuFini )
+		if( jeuFini )
 		{
 			this.ctrl.setTexteErreur( "Le joueur " + joueurActuel+ " a gagné");
 		}
 	}
 
-	/*public void jouer()
+	public void jouer()
 	{
 		boolean jeuFini = false;
 		boolean coupValide;
@@ -134,7 +129,7 @@ public class Puissance4
 			}
 		}
 		scanner.close();
-	}*/
+	}
 
 	public void afficherPlateau()
 	{
@@ -150,15 +145,14 @@ public class Puissance4
 		System.out.println("---------------");
 	}
 
-	public boolean verifierVictoire(char joueur)
-	{
+public boolean verifierVictoire(char joueur)
+{
 		// Vérification des lignes
 		for (int i = 0; i < LIGNES; i++)
 		{
 			for (int j = 0; j <= COLONNES - 4; j++)
 			{
-				if (this.plateau[i][j]     == joueur && this.plateau[i][j + 1] == joueur &&
-				    this.plateau[i][j + 2] == joueur && this.plateau[i][j + 3] == joueur)
+				if (plateau[i][j] == joueur && plateau[i][j + 1] == joueur && plateau[i][j + 2] == joueur && plateau[i][j + 3] == joueur)
 				{
 					return true;
 				}
@@ -170,8 +164,7 @@ public class Puissance4
 		{
 			for (int j = 0; j < COLONNES; j++)
 			{
-				if (this.plateau[i][j]     == joueur && this.plateau[i + 1][j] == joueur &&
-				    this.plateau[i + 2][j] == joueur && this.plateau[i + 3][j] == joueur)
+				if (plateau[i][j] == joueur && plateau[i + 1][j] == joueur && plateau[i + 2][j] == joueur && plateau[i + 3][j] == joueur)
 				{
 					return true;
 				}
@@ -183,8 +176,7 @@ public class Puissance4
 		{
 			for (int j = 0; j <= COLONNES - 4; j++)
 			{
-				if (this.plateau[i][j]         == joueur && this.plateau[i - 1][j + 1] == joueur &&
-				    this.plateau[i - 2][j + 2] == joueur && this.plateau[i - 3][j + 3] == joueur)
+				if (plateau[i][j] == joueur && plateau[i - 1][j + 1] == joueur && plateau[i - 2][j + 2] == joueur && plateau[i - 3][j + 3] == joueur)
 				{
 					return true;
 				}
@@ -196,8 +188,7 @@ public class Puissance4
 		{
 			for (int j = 0; j <= COLONNES - 4; j++)
 			{
-				if (this.plateau[i][j]         == joueur && this.plateau[i + 1][j + 1] == joueur &&
-				    this.plateau[i + 2][j + 2] == joueur && this.plateau[i + 3][j + 3] == joueur)
+				if (plateau[i][j] == joueur && plateau[i + 1][j + 1] == joueur && plateau[i + 2][j + 2] == joueur && plateau[i + 3][j + 3] == joueur)
 				{
 					return true;
 				}
@@ -213,7 +204,7 @@ public class Puissance4
 		{
 			for (int j = 0; j < COLONNES; j++)
 			{
-				if (this.plateau[i][j] == VIDE)
+				if (plateau[i][j] == VIDE)
 				{
 					return false;
 				}
