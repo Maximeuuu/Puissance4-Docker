@@ -46,7 +46,7 @@ public class Controleur
 	
 	public boolean estFini()
 	{
-		this.metier.estFini();
+		return this.metier.estFini();
 	}
 	
 	
