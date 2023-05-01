@@ -6,21 +6,24 @@ import java.awt.Color;
 
 public class Frame extends JFrame
 {
-	public Frame()
+	private Controleur ctrl;
+	
+	public Frame( Controleur ctrl )
 	{
+		this.ctrl = ctrl;
+		
 		PanelAccueil accueil;
 		
 		this.setTitle   ("Page Accueil");
-		this.setSize    (400, 300);
+		this.setSize    (400, 200);
 		this.setLocation(20, 20);
 		
-		accueil = new PanelAccueil();
+		accueil = new PanelAccueil( this.ctrl );
 		
 		this.add(accueil);
 		
 		this.setVisible(true);
-
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
 	
 }

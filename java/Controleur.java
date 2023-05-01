@@ -3,11 +3,19 @@ public class Controleur
 	private Puissance4 metier;
 	private FramePuissance4 ihm;
 	
+	private Frame accueil;
+	
 	public Controleur()
+	{
+		this.accueil = new Frame( this );
+		
+	}
+	
+	public void lancerPartie()
 	{
 		this.metier = new Puissance4( this );
 		this.ihm    = new FramePuissance4( this );
-
+		
 		this.ihm.majGrille();
 	}
 	
