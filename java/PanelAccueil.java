@@ -1,5 +1,4 @@
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,6 +12,8 @@ public class PanelAccueil extends JPanel
 	
 	public PanelAccueil()
 	{
+		this.txtPseudo = new JTextField();
 		
+		this.add( this.txtPseudo );
 	}
 }
