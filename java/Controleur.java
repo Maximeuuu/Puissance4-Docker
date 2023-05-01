@@ -19,11 +19,6 @@ public class Controleur
 		this.ihm.majGrille();
 	}
 	
-	public static void main( String[] args )
-	{
-		new Controleur();
-	}
-	
 	public char getCase( int lig, int col )
 	{
 		return this.metier.getCase(lig, col);
@@ -47,5 +42,16 @@ public class Controleur
 	public void setTexteErreur( String message )
 	{
 		this.ihm.setTexteErreur( message );
+	}
+	
+	public boolean estFini()
+	{
+		this.metier.estFini();
+	}
+	
+	
+	public static void main( String[] args )
+	{
+		new Controleur();
 	}
 }
