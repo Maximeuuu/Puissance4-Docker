@@ -1,85 +1,72 @@
 import java.net.*;
 import java.io.*;
 
-public class Client
+public class Serveur
 {
 	private Controleur ctrl;
-	private Socket toServer;
-	
-	public Client ( String ip, int portNumber, Controleur ctrl )
+	private int        port;
+	private Socket toClient;
+
+	public Serveur (int port, Controleur ctrl)
 	{
+		this.port = port;
 		this.ctrl = ctrl;
-		
+
+		System.out.println("En attente d'un client...");
 		try
 		{
-			this.toServer = new Socket(ip, portNumber);
+			ServerSocket ss = new ServerSocket(port);
+			
+			this.toClient = ss.accept();
 			
 			this.ctrl.lancerPartie();
+			
+			//toClient.close();
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+	}
 
-			/*int cpt = 0;
-			while( !this.ctrl.estFini() )
+	public void envoyer(int col) 
+	{
+		try {
+			PrintWriter out = new PrintWriter(this.toClient.getOutputStream(), true);
+			out.println( col + "");
+			out.close();
+		}
+		catch (IOException e) {
+	}
+
+	}
+
+	
+	public int recevoir() 
+	{
+		int pos = -1;
+
+		try 
+		{
+			BufferedReader in = new BufferedReader(new InputStreamReader(this.toClient.getInputStream()));
+			String text = in.readLine();
+
+			while (text == null) 
 			{
-				if( cpt % 2 == 0 )
-				{
-					this.ctrl.ajouterPiece( this.recevoir() );
-				}
-				
-				if( cpt % 2 == 1 )
-				{
-					this.envoyer();
-				}
-				
-				cpt++;
-			}*/
-			
-			//toServer.close();
-			
-		
-		}catch( IOException e ){ System.out.println("erreur de connection"); }
-		
-	}
-	
-	public void envoyer() {
-    while (ctrl.getDernierCoup() == -1 || ctrl.getTour() != 0) {
-    }
-    try {
-        PrintWriter out = new PrintWriter(this.toServer.getOutputStream(), true);
-        out.println(ctrl.getDernierCoup() + "");
-        out.close();
-    } catch (IOException e) {
-    }
+				text = in.readLine();
+				System.out.println(text);
+			}
+			pos = Integer.parseInt(text);
 
-    ctrl.resetCoup();
-	}
-	
-	
-	public int recevoir() {
-    int pos = -1;
-
-    try {
-        BufferedReader in = new BufferedReader(new InputStreamReader(this.toServer.getInputStream()));
-        String text = in.readLine();
-
-        while (ctrl.getTour() != 1) {
-        }
-
-        while (text != null) {
-            try {
-                pos = Integer.parseInt(text);
-                break;
-            } catch (NumberFormatException e) {
-                System.err.println("Erreur de conversion en entier : " + text);
-            }
-            text = in.readLine();
-        }
-
-        in.close();
-    } catch (IOException e) {
-        System.err.println("Erreur d'E/S : " + e.getMessage());
-    }
-
-    ctrl.resetCoup();
-
-    return pos;
+			in.close();
+		} 
+		catch (IOException e) 
+		{
+			System.err.println("Erreur d'E/S : " + e.getMessage());
+		}
+		System.out.println(pos);
+		return pos;
 	}
 }
