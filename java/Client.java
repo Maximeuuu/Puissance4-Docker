@@ -4,17 +4,15 @@ import java.io.*;
 public class Client
 {
 	private Controleur ctrl;
+	private Socket toServer;
 	
 	public Client ( String ip, int portNumber, Controleur ctrl )
 	{
 		try
 		{
-			Socket toServer = new Socket(ip, portNumber);
+			this.toServer = new Socket(ip, portNumber);
 			
 			this.ctrl.lancerPartie();
-			
-			BufferedReader in = new BufferedReader( new InputStreamReader(toServer.getInputStream()));
-			PrintWriter out   = new PrintWriter(toServer.getOutputStream(), true);
 
 			int cpt = 0;
 			while( this.ctrl.estFini() )
@@ -32,8 +30,6 @@ public class Client
 				cpt++;
 			}
 			
-			out.close();
-			in.close();
 			toServer.close();
 			
 		
@@ -42,24 +38,62 @@ public class Client
 	
 	public void envoyer()
 	{
-		while ( this.ctrl.metier.getDernierCoup() == -1)
+		while ( this.ctrl.getDernierCoup() == -1)
 		{
 			
 		}
-		PrintWriter out   = new PrintWriter(toServer.getOutputStream(), true);
-		out.println( this.ctrl.metier.getDernierCoup() + "" );
+		try
+		{
+			PrintWriter out   = new PrintWriter(this.toServer.getOutputStream(), true);
+			out.println( this.ctrl.getDernierCoup() + "" );
+			out.close();
+		}catch( IOException e ){}
 		
-		this.ctrl.metier.resetCoup();
+		this.ctrl.resetCoup();
 	}
 	
-	public int recevoir()
+	/*public int recevoir()
 	{
 		int pos = -1;
-		while ( pos == -1 )
-		{
-			BufferedReader in = new BufferedReader( new InputStreamReader(toServer.getInputStream()));
-			pos = Integer.parseInt( in.readLine() );
-		}
+		
+		try{
+			BufferedReader in = new BufferedReader( new InputStreamReader(this.toServer.getInputStream()));
+			while ( pos == -1 )
+			{
+				String text = in.readLine();
+				pos = Integer.parseInt( text );
+			}
+			in.close();
+		}catch( IOException e ){}
+		
 		return pos;
+	}*/
+	
+	public int recevoir() {
+    int pos = -1;
+    
+    try {
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.toServer.getInputStream()));
+        String text = in.readLine(); // Lecture d'une ligne du flux d'entrée
+        
+        // Utilisation d'une boucle pour gérer les lectures multiples
+        while (text != null) {
+            try {
+                pos = Integer.parseInt(text); // Conversion en entier
+                break; // Sortie de la boucle si la conversion a réussi
+            } catch (NumberFormatException e) {
+                // Gestion de l'exception si la chaîne ne peut pas être convertie en entier
+                System.err.println("Erreur de conversion en entier : " + text);
+            }
+            text = in.readLine(); // Lecture de la ligne suivante
+        }
+        
+        in.close(); // Fermeture du flux d'entrée
+    } catch (IOException e) {
+        // Gestion de l'exception d'E/S
+        System.err.println("Erreur d'E/S : " + e.getMessage());
+    }
+    
+    return pos;
 	}
 }
