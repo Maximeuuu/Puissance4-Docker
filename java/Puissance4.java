@@ -35,26 +35,25 @@ public class Puissance4
 	public void placer( int col )
 	{
 		boolean coupValide = false;
-		while (!coupValide)
+		
+		System.out.println("Joueur " + getJoueur(joueurActuel) );
+		int colonne = col;
+		if (colonne >= 0 && colonne < COLONNES && plateau[0][colonne] == VIDE)
 		{
-			System.out.println("Joueur " + getJoueur(joueurActuel) );
-			int colonne = col;
-			if (colonne >= 0 && colonne < COLONNES && plateau[0][colonne] == VIDE)
+			for (int i = LIGNES - 1; i >= 0; i--)
 			{
-				for (int i = LIGNES - 1; i >= 0; i--)
+				if (plateau[i][colonne] == VIDE)
 				{
-					if (plateau[i][colonne] == VIDE)
-					{
-						plateau[i][colonne] = joueurActuel;
-						coupValide = true;
-						break;
-					}
+					plateau[i][colonne] = joueurActuel;
+					coupValide = true;
+					break;
 				}
-			} else
-			{
-				System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
 			}
+		} else
+		{
+			System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
 		}
+		
 		this.dernierCoup = col;
 		if (verifierVictoire(joueurActuel))
 		{
