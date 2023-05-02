@@ -70,7 +70,13 @@ public class FramePuissance4 extends JFrame implements KeyListener
 		}
 		
 		if(this.ctrl.getTour() == 1 && e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
 			this.ctrl.ajouterPiece( this.pnlFleche.getColonne() );
+			this.ctrl.envoyer( this.pnlFleche.getColonne() );
+		}
+		
+		if(this.ctrl.getTour() == 0)
+			this.ctrl.ajouterPiece( this.ctrl.recevoir() );
 		
 		// Redessine la grille dans l'interface graphique
 		this.majGrille();
