@@ -76,4 +76,9 @@ public class Controleur
 	{
 		this.client  = new Client  ( ip, port, this );
 	}
+
+	public void cacherFrame()
+	{
+		this.accueil.cacherFrame();
+	}
 }
