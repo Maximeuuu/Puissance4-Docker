@@ -57,6 +57,10 @@ public class FramePuissance4 extends JFrame implements KeyListener
 	@Override
 	public void keyPressed( KeyEvent e )
 	{
+		if (this.ctrl.estFini())
+		{
+			this.setVisible(false);
+		}
 		switch ( e.getKeyCode() )
 		{
 			case KeyEvent.VK_LEFT -> this.ctrl.bougerFleche('G');
