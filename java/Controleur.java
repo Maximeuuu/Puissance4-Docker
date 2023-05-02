@@ -7,6 +7,8 @@ public class Controleur
 
 	private Serveur         serveur;
 	private Client          client;
+	
+	private int tour = -1;
 
 	public Controleur()
 	{
@@ -39,6 +41,18 @@ public class Controleur
 	public void ajouterPiece( int col )
 	{
 		this.metier.placer( col );
+		if (tour == 0) {
+		    // Ajouter la pièce du joueur 1
+		    tour = 1;
+		} else {
+		    // Ajouter la pièce du joueur 2
+		    tour = 0;
+    	}
+	}
+	
+	public int getTour()
+	{
+		return this.tour;
 	}
 	
 	public void setTexteJoueur( char joueur )
@@ -70,11 +84,13 @@ public class Controleur
 	public void creerServeur( int port )
 	{
 		this.serveur = new Serveur ( port, this);
+		this.tour = 0;
 	}
 
 	public void creerClient ( int port, String ip )
 	{
 		this.client  = new Client  ( ip, port, this );
+		this.tour = 1;
 	}
 
 	public void cacherFrame()
