@@ -26,4 +26,8 @@ public class Frame extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public void cacherFrame()
+	{
+		this.setVisible(false);
+	}
 }
