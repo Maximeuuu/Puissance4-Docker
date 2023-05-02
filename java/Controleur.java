@@ -1,14 +1,16 @@
 public class Controleur
 {
-	private Puissance4 metier;
+	private Puissance4      metier;
 	private FramePuissance4 ihm;
 	
-	private Frame accueil;
-	
+	private Frame           accueil;
+
+	private Serveur         serveur;
+	private Client          client;
+
 	public Controleur()
 	{
 		this.accueil = new Frame( this );
-		
 	}
 	
 	public void lancerPartie()
@@ -22,6 +24,11 @@ public class Controleur
 	public char getCase( int lig, int col )
 	{
 		return this.metier.getCase(lig, col);
+	}
+	
+	public boolean estFini()
+	{
+		return this.metier.estFini();
 	}
 	
 	public void bougerFleche( char col )
@@ -44,14 +51,19 @@ public class Controleur
 		this.ihm.setTexteErreur( message );
 	}
 	
-	public boolean estFini()
-	{
-		return this.metier.estFini();
-	}
-	
-	
 	public static void main( String[] args )
 	{
 		new Controleur();
+	}
+
+
+	public void creerServeur( int port )
+	{
+		this.serveur = new Serveur ( port, this);
+	}
+
+	public void creerClient ( int port, String ip )
+	{
+		this.client  = new Client  ( ip, port, this );
 	}
 }
