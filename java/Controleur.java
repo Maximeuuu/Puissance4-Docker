@@ -97,4 +97,17 @@ public class Controleur
 	{
 		this.accueil.cacherFrame();
 	}
+	
+	public void envoyer( int col )
+	{
+		if( this.client  != null ) this.client.envoyer(col);
+		if( this.serveur != null ) this.serveur.envoyer(col);
+	}
+	
+	public int recevoir()
+	{
+		if( this.client  != null ) return this.client.recevoir();
+		if( this.serveur != null ) return this.serveur.recevoir();
+		return 0;
+	}
 }
