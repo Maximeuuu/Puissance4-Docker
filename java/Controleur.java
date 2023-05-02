@@ -51,6 +51,16 @@ public class Controleur
 		this.ihm.setTexteErreur( message );
 	}
 	
+	public int getDernierCoup()
+	{
+		return this.metier.getDernierCoup();
+	}
+	
+	public void resetCoup()
+	{
+		this.metier.resetCoup();
+	}
+	
 	public static void main( String[] args )
 	{
 		new Controleur();
