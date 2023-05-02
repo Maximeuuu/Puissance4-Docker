@@ -5,8 +5,9 @@ public class Serveur
 {
 	private Controleur ctrl;
 	private int        port;
+	private Socket toClient;
 
-	public Serveur (int port, ctrl Controleur)
+	public Serveur (int port, Controleur ctrl)
 	{
 		this.port = port;
 		this.ctrl = ctrl;
@@ -18,14 +19,9 @@ public class Serveur
 
 			while (true)
 			{
-				Socket toClient = ss.accept(); // bloqué tant que le client n’arrive pas
-				System.out.println(toClient.getInetAddress() + " est connecté");
+				this.toClient = ss.accept();
 
 				this.ctrl.lancerPartie();
-
-				PrintWriter out = new PrintWriter(toClient.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(toClient.getInputStream()));
-
 
 				int cpt = 0;
 				while ( !this.ctrl.estFini() )
@@ -43,40 +39,73 @@ public class Serveur
 				//out.println();
 				//in.readLine();
 
-				in.close();
-				out.close();
 				toClient.close();
 			}
-			catch(Exception e)
-			{
-				System.out.println(e);
-			}
 		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+
 	}
 
 
 	public void envoyer ()
 	{
-		while ( this.ctrl.metier.getDernierCoup() == -1 )
+		while ( this.ctrl.getDernierCoup() == -1 )
 		{
 			
 		}
 
-		PrintWriter out = new PrintWriter(toClient.getOutputStream(), true);
-		out.println ( this.ctrl.metier.getDernierCoup() + "" );
+		try{
+		PrintWriter out = new PrintWriter(this.toClient.getOutputStream(), true);
+		out.println ( this.ctrl.getDernierCoup() + "" );
+		out.close();
+		}catch( IOException e ){}
 
-		this.ctrl.metier.resetCoup();
+		this.ctrl.resetCoup();
 	}
 
-	public int  recevoir
+	/*public int recevoir()
 	{
-		int pos -1;
+		int pos = -1;
+		
+		BufferedReader in = new BufferedReader( new InputStreamReader(this.toClient.getInputStream()));
 		while ( pos == -1 )
 		{
-			BufferedReader in = new BufferedReader(new InputStreamReader(toClient.getInputStream()));
-			pos = Integer.parseInt( in.readLine() );
+			String text = in.readLine();
+			pos = Integer.parseInt( text );
 		}
-
+		in.close();
+		
+		
 		return pos;
+	}*/
+	public int recevoir() {
+    int pos = -1;
+    
+    try {
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.toClient.getInputStream()));
+        String text = in.readLine(); // Lecture d'une ligne du flux d'entrée
+        
+        // Utilisation d'une boucle pour gérer les lectures multiples
+        while (text != null) {
+            try {
+                pos = Integer.parseInt(text); // Conversion en entier
+                break; // Sortie de la boucle si la conversion a réussi
+            } catch (NumberFormatException e) {
+                // Gestion de l'exception si la chaîne ne peut pas être convertie en entier
+                System.err.println("Erreur de conversion en entier : " + text);
+            }
+            text = in.readLine(); // Lecture de la ligne suivante
+        }
+        
+        in.close(); // Fermeture du flux d'entrée
+    } catch (IOException e) {
+        // Gestion de l'exception d'E/S
+        System.err.println("Erreur d'E/S : " + e.getMessage());
+    }
+    
+    return pos;
 	}
 }
