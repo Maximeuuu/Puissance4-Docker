@@ -1,40 +1,32 @@
 import java.net.*;
 import java.io.*;
 
-public class Serveur
+public class Client
 {
 	private Controleur ctrl;
-	private int        port;
-	private Socket toClient;
-
-	public Serveur (int port, Controleur ctrl)
+	private Socket toServer;
+	
+	public Client ( String ip, int portNumber, Controleur ctrl )
 	{
-		this.port = port;
 		this.ctrl = ctrl;
-
-		System.out.println("En attente d'un client...");
+		
 		try
 		{
-			ServerSocket ss = new ServerSocket(port);
-			
-			this.toClient = ss.accept();
+			this.toServer = new Socket(ip, portNumber);
 			
 			this.ctrl.lancerPartie();
 			
-			//toClient.close();
+			//toServer.close();
 			
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
+		
+		}catch( IOException e ){ System.out.println("erreur de connection"); }
 		
 	}
-
+	
 	public void envoyer(int col) 
 	{
 		try {
-			PrintWriter out = new PrintWriter(this.toClient.getOutputStream(), true);
+			PrintWriter out = new PrintWriter(this.toServer.getOutputStream(), true);
 			out.println( col + "");
 			out.close();
 		}
@@ -50,7 +42,7 @@ public class Serveur
 
 		try 
 		{
-			BufferedReader in = new BufferedReader(new InputStreamReader(this.toClient.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(this.toServer.getInputStream()));
 			String text = in.readLine();
 
 			while (text == null) 
