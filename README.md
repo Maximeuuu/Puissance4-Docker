@@ -1,4 +1,4 @@
-# Sae 2.03 - Equipe 14
+# Docker - Puissance4
 
 Sa        Matéo   - B2
 
@@ -13,3 +13,9 @@ A faire :
 - ReadMe.md
 
 - site internet pur la présentation
+
+## Instruction pour lancer le Puissance4
+
+1/ Vérifier que docker est installé : docker --version
+ 
+ 
