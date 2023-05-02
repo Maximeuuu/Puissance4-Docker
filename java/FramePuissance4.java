@@ -61,12 +61,16 @@ public class FramePuissance4 extends JFrame implements KeyListener
 		{
 			this.setVisible(false);
 		}
+		
+
 		switch ( e.getKeyCode() )
 		{
 			case KeyEvent.VK_LEFT -> this.ctrl.bougerFleche('G');
 			case KeyEvent.VK_RIGHT -> this.ctrl.bougerFleche('D');
-			case KeyEvent.VK_DOWN -> this.ctrl.ajouterPiece( this.pnlFleche.getColonne() );
 		}
+		
+		if(this.ctrl.getTour() == 1 && e.getKeyCode() == KeyEvent.VK_DOWN)
+			this.ctrl.ajouterPiece( this.pnlFleche.getColonne() );
 		
 		// Redessine la grille dans l'interface graphique
 		this.majGrille();
