@@ -10,14 +10,15 @@ public class Puissance4
 	public static final char JOUEUR2 = 'O';
 
 	private char[][] plateau;
-	private char joueurActuel;
-	
+	private char     joueurActuel;
+	private boolean  jeuFini;
 	private Controleur ctrl;
 
 	public Puissance4(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
-		
+		this.jeuFini = false;
+
 		plateau = new char[LIGNES][COLONNES];
 		for (int i = 0; i < LIGNES; i++)
 		{
@@ -31,11 +32,10 @@ public class Puissance4
 
 	public void placer( int col )
 	{
-		boolean jeuFini = false;
 		boolean coupValide = false;
 		while (!coupValide)
 		{
-			System.out.print("Joueur " + joueurActuel );
+			System.out.println("Joueur " + getJoueur(joueurActuel) );
 			int colonne = col;
 			if (colonne >= 0 && colonne < COLONNES && plateau[0][colonne] == VIDE)
 			{
@@ -56,13 +56,13 @@ public class Puissance4
 		if (verifierVictoire(joueurActuel))
 		{
 			afficherPlateau();
-			System.out.println("Joueur " + joueurActuel + " remporte la partie !");
-			jeuFini = true;
+			System.out.println("Joueur " + getJoueur(joueurActuel) + " remporte la partie !");
+			this.jeuFini = true;
 		} else if (verifierEgalite())
 		{
 			afficherPlateau();
 			System.out.println("Egalité !");
-			jeuFini = true;
+			this.jeuFini = true;
 		} else
 		{
 			joueurActuel = (joueurActuel == JOUEUR1) ? JOUEUR2 : JOUEUR1;
@@ -71,12 +71,12 @@ public class Puissance4
 		this.ctrl.setTexteJoueur( joueurActuel );
 		
 		//a modifié
-		if( jeuFini )
+		if( this.jeuFini )
 		{
-			this.ctrl.setTexteErreur( "Le joueur " + joueurActuel+ " a gagné");
+			this.ctrl.setTexteErreur( "Le joueur " + getJoueur(joueurActuel) + " a gagné");
 		}
 	}
-
+/*
 	public void jouer()
 	{
 		boolean jeuFini = false;
@@ -130,7 +130,7 @@ public class Puissance4
 		}
 		scanner.close();
 	}
-
+*/
 	public void afficherPlateau()
 	{
 		System.out.println(" 1 2 3 4 5 6 7 ");
@@ -145,8 +145,8 @@ public class Puissance4
 		System.out.println("---------------");
 	}
 
-public boolean verifierVictoire(char joueur)
-{
+		public boolean verifierVictoire(char joueur)
+		{
 		// Vérification des lignes
 		for (int i = 0; i < LIGNES; i++)
 		{
@@ -218,11 +218,29 @@ public boolean verifierVictoire(char joueur)
 		return this.plateau[lig][col];
 	}
 
+	public String getJoueur (char joueur)
+	{
+		String res;
+		
+		switch (joueur)
+		{
+			case Puissance4.JOUEUR1 -> res = "ROUGE";
+			case Puissance4.JOUEUR2 -> res = "JAUNE";
+			default  -> res = "ERREUR";
+		}
+
+		return res;
+	}
+
+	public boolean estFini()
+	{
+		return this.jeuFini;
+	}
+
 	/*public static void main(String[] args)
 	{
 		Puissance4 jeu = new Puissance4();
 		jeu.jouer();
 	}*/
 }
-
 
