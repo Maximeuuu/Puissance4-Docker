@@ -13,6 +13,8 @@ public class Puissance4
 	private char     joueurActuel;
 	private boolean  jeuFini;
 	private Controleur ctrl;
+	
+	private int dernierCoup = -1;
 
 	public Puissance4(Controleur ctrl)
 	{
@@ -53,6 +55,7 @@ public class Puissance4
 				System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
 			}
 		}
+		this.dernierCoup = col;
 		if (verifierVictoire(joueurActuel))
 		{
 			afficherPlateau();
@@ -76,61 +79,7 @@ public class Puissance4
 			this.ctrl.setTexteErreur( "Le joueur " + getJoueur(joueurActuel) + " a gagné");
 		}
 	}
-/*
-	public void jouer()
-	{
-		boolean jeuFini = false;
-		boolean coupValide;
-		int colonne;
-		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Bienvenue dans le jeu de Puissance 4 !");
-		System.out.println("Les colonnes sont numérotées de 1 à " + COLONNES + ".");
-		System.out.println("Pour jouer, entrez le numéro de la colonne où vous souhaitez placer votre pion.");
-		System.out.println("Que le meilleur gagne !\n");
-
-		while (!jeuFini)
-		{
-			afficherPlateau();
-			coupValide = false;
-			while (!coupValide)
-			{
-				System.out.print("Joueur " + joueurActuel + ", entrez le numéro de la colonne : ");
-				colonne = scanner.nextInt() - 1;
-				if (colonne >= 0 && colonne < COLONNES && plateau[0][colonne] == VIDE)
-				{
-					for (int i = LIGNES - 1; i >= 0; i--)
-					{
-						if (plateau[i][colonne] == VIDE)
-						{
-							plateau[i][colonne] = joueurActuel;
-							coupValide = true;
-							break;
-						}
-					}
-				} else
-				{
-					System.out.println("Coup invalide. Veuillez choisir une colonne valide.");
-				}
-			}
-			if (verifierVictoire(joueurActuel))
-			{
-				afficherPlateau();
-				System.out.println("Joueur " + joueurActuel + " remporte la partie !");
-				jeuFini = true;
-			} else if (verifierEgalite())
-			{
-				afficherPlateau();
-				System.out.println("Egalité !");
-				jeuFini = true;
-			} else
-			{
-				joueurActuel = (joueurActuel == JOUEUR1) ? JOUEUR2 : JOUEUR1;
-			}
-		}
-		scanner.close();
-	}
-*/
 	public void afficherPlateau()
 	{
 		System.out.println(" 1 2 3 4 5 6 7 ");
@@ -236,11 +185,14 @@ public class Puissance4
 	{
 		return this.jeuFini;
 	}
-
-	/*public static void main(String[] args)
+	
+	public int getDernierCoup()
 	{
-		Puissance4 jeu = new Puissance4();
-		jeu.jouer();
-	}*/
+		return this.dernierCoup;
+	}
+	
+	public void resetCoup()
+	{
+		this.dernierCoup = -1;
+	}
 }
-
