@@ -1,5 +1,5 @@
-# docker-sae203
+# Sae 2.03 - Equipe 14
 
-liste des trucs a faire :
-  -faire le truc qui ignore les dossiers class
-  -faire la sae
+Sa        Matéo   - B2
+Baillobay Trystan - B1
+Lemoine   Maxime  - B2
