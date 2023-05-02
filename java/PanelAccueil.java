@@ -12,6 +12,7 @@ public class PanelAccueil extends JPanel implements ActionListener
 	private JTextField txtPseudo;
 	private JTextField txtPortServ;
 	private JTextField txtPortCli;
+	private JTextField txtIpCli;
 	
 	private JButton btnCreer;
 	private JButton btnRejoindre;
@@ -32,6 +33,9 @@ public class PanelAccueil extends JPanel implements ActionListener
 		
 		this.btnCreer     = new JButton("Créer une Salle");
 		this.btnRejoindre = new JButton("Rejoindre une Salle");
+		
+		this.btnCreer    .addActionListener(this);
+		this.btnRejoindre.addActionListener(this);
 		
 		this.add( new JLabel("Pseudo : "), BorderLayout.NORTH );
 		this.add( this.txtPseudo         , BorderLayout.NORTH );
@@ -64,7 +68,7 @@ public class PanelAccueil extends JPanel implements ActionListener
 
 		if( e.getSource() == this.btnRejoindre )
 		{
-			this.ctrl.creerClient  ( Integer.parseInt ( txtPortServ.getText() ), txtIpCli );
+			this.ctrl.creerClient  ( Integer.parseInt ( this.txtPortServ.getText() ), this.txtIpCli.getText()  );
 			this.setVisible(false);
 		}
 	}
