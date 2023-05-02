@@ -63,13 +63,13 @@ public class PanelAccueil extends JPanel implements ActionListener
 		if( e.getSource() == this.btnCreer )
 		{
 			this.ctrl.creerServeur ( Integer.parseInt ( txtPortServ.getText() )           );
-			this.setVisible(false);
+			this.ctrl.cacherFrame();
 		}
 
 		if( e.getSource() == this.btnRejoindre )
 		{
 			this.ctrl.creerClient  ( Integer.parseInt ( this.txtPortServ.getText() ), this.txtIpCli.getText()  );
-			this.setVisible(false);
+			this.ctrl.cacherFrame();
 		}
 	}
 }
