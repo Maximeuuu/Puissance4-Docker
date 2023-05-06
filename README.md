@@ -17,7 +17,7 @@ A faire :
 ## Instruction pour lancer le Puissance4
 
 1. Installer un serveur X11 pour windows.
-2. Télécharger depuis le github l'(image Docker)[https://github.com/MatKim76/docker-sae203/blob/8f5a2292059c602d4a4715eaf883eccddfebda84/Dockerfile] ``Dockerfile``.
+2. Télécharger depuis le github l'[image Docker](https://github.com/MatKim76/docker-sae203/blob/8f5a2292059c602d4a4715eaf883eccddfebda84/Dockerfile) ``Dockerfile``.
 3. Exécuter l'application Docker depuis le systeme d'exploitation actuel.
 
 Dans un terminal
