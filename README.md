@@ -27,7 +27,10 @@ A faire :
 1. Vérifier que docker est installé : ``docker --version``.
 2. Se déplacer dans le répertoire où se situe l'image ``Dockerfile`` : ``cd <repertoire>``.
 3. Construire l'image : ``docker build -t img-puissance4 .``
+
 *info : le processus peut prendre quelques secondes (1min environs)*
+![build puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/docker_build_puissance4.png)
+
 4. Fermer le terminal.
 
 * * *
