@@ -56,5 +56,8 @@ A faire :
 3. Une fenêtre s'ouvre, on complète les entrées.
 *info : dans ip mettre : ``172.17.0.2``*
 4. Appuyer sur le bouton "rejoindre salle".
- 
-Vous pouvez jouer via les deux terminals !
+
+*info : vous devriez obtenir ceci dans le terminal du serveur*
+![terminal puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/execution_java_puissance4.png)
+
+**Vous pouvez jouer via les deux terminals !**
