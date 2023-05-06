@@ -7,13 +7,16 @@ Baillobay Trystan - B1
 Lemoine   Maxime  - B2
 
 A faire :
-- site internet pur la présentation
+- site internet pour la présentation
 
 ## Instruction pour lancer le Puissance4
 
-1. Installer un serveur X11 pour windows.
+### Première installation (à faire une fois)
+
+1. Installer un serveur X11 (exemple : Xming pour windows).
 2. Télécharger depuis le github l'[image Docker](https://github.com/MatKim76/docker-sae203/blob/8f5a2292059c602d4a4715eaf883eccddfebda84/Dockerfile) ``Dockerfile``.
-3. Exécuter l'application Docker depuis le systeme d'exploitation actuel.
+3. Exécuter l'application de **serveur X11**.
+4. Exécuter l'application **Docker**.
 
 Dans un terminal
 1. Vérifier que docker est installé : ``docker --version``.
@@ -21,6 +24,7 @@ Dans un terminal
 3. Construire l'image : ``docker build -t img-puissance4 .``
 4. Fermer le terminal.
 
+### Exécution (à faire à chaque fois pour jouer)
 Dans un premier terminal
 1. Lancer le serveur : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
 2. Vérifier si le conteneur existe : ``docker ps``.
@@ -36,4 +40,4 @@ Dans un second terminal
 *info : dans ip mettre : ``172.17.0.2``*
 4. Appuyer sur le bouton "rejoindre salle".
  
-Vous pouvez jouer via les deux terminals.
+Vous pouvez jouer via les deux terminals !
