@@ -7,9 +7,6 @@ Baillobay Trystan - B1
 Lemoine   Maxime  - B2
 
 * * *
-A faire :
-- site internet pour la présentation
-* * *
 
 ## Instructions pour lancer le Puissance4
 
