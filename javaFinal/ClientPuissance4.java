@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
-import iut.algo.*;
+//import iut.algo.*;
+import java.io.Console;
 
 public class ClientPuissance4
 {
@@ -11,11 +12,14 @@ public class ClientPuissance4
 
 	public ClientPuissance4( String host, int port, String utilisateur )
 	{
+		Console console;
 		BufferedReader in;
 		PrintWriter out;
 		String message="";
 		String envoyer="";
 
+		console = System.console();
+		
 		try
 		{
 			this.toServer = new Socket( host, port );
@@ -43,14 +47,16 @@ public class ClientPuissance4
 				if( message.equals("rejouer") )
 				{
 					System.out.println("Console : coup invalide, veuillez rejouer");
-					envoyer =  Clavier.lire_int() + "";
+					//envoyer =  Clavier.lire_int() + "";
+					envoyer = console.readLine(">") + "";
 					out.println( envoyer );
 				}
 
 				if( message.equals("jouer") ) //ou non null...
 				{
 					System.out.println("Console : à vous de jouer");
-					envoyer =  Clavier.lire_int() + "";
+					//envoyer =  Clavier.lire_int() + "";
+					envoyer = console.readLine(">") + "";
 					out.println( envoyer );
 				}
 
