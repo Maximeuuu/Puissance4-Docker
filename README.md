@@ -25,7 +25,7 @@ Lemoine   Maxime  - B2
 2. Se déplacer dans le répertoire où se situe l'image ``Dockerfile`` : ``cd <repertoire>``.
 3. Construire l'image : ``docker build -t img-puissance4 .``
 
-*info : le processus peut prendre quelques secondes (1min environs)*
+*info : le processus peut prendre quelques secondes (2min environs)*
 ![build puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/docker_build_puissance4.png)
 
 4. Fermer le terminal.
@@ -39,22 +39,32 @@ Lemoine   Maxime  - B2
 1. Exécuter l'application de **serveur X11**.
 2. Exécuter l'application **Docker**.
 
-#### Dans un premier terminal
+#### Dans un premier terminal - Serveur
 1. Lancer le serveur : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
 2. Vérifier si le conteneur existe : ``docker ps``.
 *info : 1 ligne devrait s'afficher*.
 3. Une fenêtre s'ouvre, on complète les entrées.
 4. Appuyer sur le bouton "Créer salle".
+5. Récupérer l'ip affichée dans le terminal (*elle correspond à l'ip du serveur*)
+![ip_serveur](.png)
 
-#### Dans un second terminal
-1. Lancer le serveur : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
+#### Dans un second terminal - Joueur 1
+1. Lancer le client : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
 2. Vérifier si le conteneur existe : ``docker ps``.
 *info : 2 lignes devraient s'afficher*
 3. Une fenêtre s'ouvre, on complète les entrées.
-*info : dans ip mettre : ``172.17.0.2``*
+*info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
+4. Appuyer sur le bouton "rejoindre salle".
+
+#### Dans un troisième terminal - Joueur 2
+1. Lancer le client : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
+2. Vérifier si le conteneur existe : ``docker ps``.
+*info : 3 lignes devraient s'afficher*
+3. Une fenêtre s'ouvre, on complète les entrées.
+*info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
 4. Appuyer sur le bouton "rejoindre salle".
 
 *info : vous devriez obtenir ceci dans le terminal du serveur*
 ![terminal puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/execution_java_puissance4.png)
 
-**Vous pouvez jouer via les deux terminals !**
+**Vous pouvez jouer via les deux terminals clients !**
