@@ -26,6 +26,7 @@ Lemoine   Maxime  - B2
 3. Construire l'image : ``docker build -t img-puissance4 .``
 
 *info : le processus peut prendre quelques secondes (2min environs)*
+
 ![build puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/docker_build_puissance4.png)
 
 4. Fermer le terminal.
@@ -45,8 +46,10 @@ Lemoine   Maxime  - B2
 *info : 1 ligne devrait s'afficher*.
 3. Une fenêtre s'ouvre, changer le port si nécessaire.
 4. Appuyer sur le bouton "Créer salle".
+
 ![serveur](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_serveur.png)
 5. Récupérer l'ip affichée dans le terminal (*elle correspond à l'ip du serveur*)
+
 ![ip](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/ip_serveur.png)
 
 #### Dans un second terminal - Joueur 1
@@ -56,6 +59,7 @@ Lemoine   Maxime  - B2
 3. Une fenêtre s'ouvre, on complète les entrées.
 *info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
 4. Appuyer sur le bouton "rejoindre salle".
+
 ![joueur1](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_joueur1.png)
 
 #### Dans un troisième terminal - Joueur 2
@@ -65,10 +69,13 @@ Lemoine   Maxime  - B2
 3. Une fenêtre s'ouvre, on complète les entrées.
 *info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
 4. Appuyer sur le bouton "rejoindre salle".
+
 ![joueur2](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_joueur2.png)
 
 *info : vous devriez obtenir ceci dans le terminal du serveur*
+
 ![terminal puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/console_serveur.png)
 
 **Vous pouvez jouer via les deux terminals clients !**
+
 ![partie de puissance 4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/partie_2joueurs.png)
