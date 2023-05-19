@@ -43,10 +43,11 @@ Lemoine   Maxime  - B2
 1. Lancer le serveur : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
 2. Vérifier si le conteneur existe : ``docker ps``.
 *info : 1 ligne devrait s'afficher*.
-3. Une fenêtre s'ouvre, on complète les entrées.
+3. Une fenêtre s'ouvre, changer le port si nécessaire.
 4. Appuyer sur le bouton "Créer salle".
+![serveur](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_serveur.png)
 5. Récupérer l'ip affichée dans le terminal (*elle correspond à l'ip du serveur*)
-![ip_serveur](.png)
+![ip](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/ip_serveur.png)
 
 #### Dans un second terminal - Joueur 1
 1. Lancer le client : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
@@ -55,6 +56,7 @@ Lemoine   Maxime  - B2
 3. Une fenêtre s'ouvre, on complète les entrées.
 *info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
 4. Appuyer sur le bouton "rejoindre salle".
+![joueur1](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_joueur1.png)
 
 #### Dans un troisième terminal - Joueur 2
 1. Lancer le client : ``docker run -it --rm -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix img-puissance4``.
@@ -63,8 +65,10 @@ Lemoine   Maxime  - B2
 3. Une fenêtre s'ouvre, on complète les entrées.
 *info : dans ip mettre : ``172.17.0.2`` ou l'ip du serveur*
 4. Appuyer sur le bouton "rejoindre salle".
+![joueur2](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_joueur2.png)
 
 *info : vous devriez obtenir ceci dans le terminal du serveur*
-![terminal puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/execution_java_puissance4.png)
+![terminal puissance4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/console_serveur.png)
 
 **Vous pouvez jouer via les deux terminals clients !**
+![partie de puissance 4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/partie_2joueurs.png)
