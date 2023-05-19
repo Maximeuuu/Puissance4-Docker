@@ -48,6 +48,7 @@ Lemoine   Maxime  - B2
 4. Appuyer sur le bouton "Créer salle".
 
 ![serveur](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/interface_serveur.png)
+
 5. Récupérer l'ip affichée dans le terminal (*elle correspond à l'ip du serveur*)
 
 ![ip](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/ip_serveur.png)
