@@ -80,3 +80,4 @@ Lemoine   Maxime  - B2
 **Vous pouvez jouer via les deux terminals clients !**
 
 ![partie de puissance 4](https://github.com/MatKim76/docker-sae203/blob/gh-pages/images/partie_2joueurs.png)
+
